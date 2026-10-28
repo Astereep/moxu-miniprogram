@@ -1,0 +1,117 @@
+<!-- 首页：项目瀑布列表 + 搜索 + 快捷入口 -->
+<view class="page index-page">
+
+  <!-- 品牌区 -->
+  <view class="brand">
+    <view class="brand-mark">M</view>
+    <view class="brand-text">
+      <text class="brand-title">模序</text>
+      <text class="brand-sub">MODEL SEQUENCE</text>
+    </view>
+    <view class="brand-stat">
+      <text class="brand-num num">{{totalCount}}</text>
+      <text class="brand-label">PROJECTS</text>
+    </view>
+  </view>
+
+  <!-- 搜索 -->
+  <view class="search-box">
+    <view class="search-icon"></view>
+    <input
+      class="search-input"
+      placeholder="搜索项目名称 / 类型 / 备注"
+      placeholder-class="placeholder"
+      confirm-type="search"
+      value="{{keyword}}"
+      bindinput="onSearch"
+    />
+    <text wx:if="{{keyword}}" class="search-clear" catchtap="clearKeyword">清除</text>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-row">
+    <view class="quick quick-primary" hover-class="quick-hover" bindtap="goCreate">
+      <text class="quick-plus">＋</text>
+      <view class="quick-info">
+        <text class="quick-name">新建项目</text>
+        <text class="quick-desc">导入模板开工</text>
+      </view>
+    </view>
+    <view class="quick" hover-class="quick-hover" bindtap="goMaterial">
+      <text class="quick-index num">01</text>
+      <view class="quick-info">
+        <text class="quick-name">材料库</text>
+        <text class="quick-desc">8 种常用材料</text>
+      </view>
+    </view>
+    <view class="quick" hover-class="quick-hover" bindtap="goRepair">
+      <text class="quick-index num">02</text>
+      <view class="quick-info">
+        <text class="quick-name">修复手册</text>
+        <text class="quick-desc">7 类缺陷</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 项目列表 -->
+  <view class="list-head">
+    <view class="section-title">项目</view>
+    <text class="list-count">按更新时间排序</text>
+  </view>
+
+  <view wx:if="{{projects.length}}" class="waterfall">
+    <view class="wf-col">
+      <block wx:for="{{leftList}}" wx:key="id">
+        <template is="projectCard" data="{{item: item}}" />
+      </block>
+    </view>
+    <view class="wf-col">
+      <block wx:for="{{rightList}}" wx:key="id">
+        <template is="projectCard" data="{{item: item}}" />
+      </block>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{!projects.length}}" class="empty card index-empty">
+    <text class="empty-mark">— — —</text>
+    <text class="empty-title">{{keyword ? '没有匹配的项目' : '从第一件手板开始'}}</text>
+    <text class="empty-desc">{{keyword ? '换个关键词，或清除搜索条件' : '新建项目后可一键导入整套标准工序'}}</text>
+    <view wx:if="{{!keyword}}" class="empty-action">
+      <view class="btn btn-primary btn-sm" bindtap="goCreate">新建项目</view>
+    </view>
+  </view>
+
+  <!-- 悬浮新建 -->
+  <view class="fab" hover-class="fab-hover" bindtap="goCreate">＋</view>
+
+  <text class="page-tip">数据仅保存在本机 · 长按项目卡片可删除</text>
+</view>
+
+<!-- 项目卡片模板 -->
+<template name="projectCard">
+  <view class="p-card" data-id="{{item.id}}" bindtap="openProject" bindlongpress="onLongPress" hover-class="p-card-hover">
+    <view class="p-cover-wrap">
+      <image wx:if="{{item.cover}}" class="p-cover" src="{{item.cover}}" mode="aspectFill" lazy-load="{{true}}" />
+      <view wx:else class="p-cover p-cover-empty">
+        <text class="p-empty-label">NO COVER</text>
+      </view>
+      <text class="p-type">{{item.type}}</text>
+      <text wx:if="{{item.finished}}" class="p-flag">已完成</text>
+    </view>
+    <view class="p-body">
+      <text class="p-name">{{item.name}}</text>
+      <view class="p-meta">
+        <text class="p-date num">{{item.dateText}}</text>
+        <text class="p-count">{{item.doneCount}} / {{item.stepCount}}</text>
+      </view>
+      <view class="p-bar">
+        <view class="p-fill" style="width: {{item.percent}}%"></view>
+      </view>
+      <view class="p-foot">
+        <text class="p-pct num">{{item.percent}}%</text>
+        <text class="p-time">{{item.minutesText}}</text>
+      </view>
+    </view>
+  </view>
+</template>

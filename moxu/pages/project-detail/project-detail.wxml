@@ -1,0 +1,103 @@
+<!-- 项目详情：总览 + 进度 + 工序打卡 -->
+<view class="page detail-page" wx:if="{{project}}">
+
+  <!-- 项目头图 -->
+  <view class="hero">
+    <image wx:if="{{project.cover}}" class="hero-img" src="{{project.cover}}" mode="aspectFill" />
+    <view wx:if="{{project.cover}}" class="hero-shade"></view>
+    <view class="hero-body">
+      <view class="hero-top">
+        <text class="tag tag-dark">{{project.type}}</text>
+        <view class="hero-more" hover-class="hero-more-hover" bindtap="onMore">···</view>
+      </view>
+      <text class="hero-name">{{project.name}}</text>
+      <text wx:if="{{project.remark}}" class="hero-remark">{{project.remark}}</text>
+    </view>
+  </view>
+
+  <!-- 整体进度 -->
+  <view class="card progress-card">
+    <view class="progress-top">
+      <text class="progress-label">整体进度</text>
+      <text class="progress-pct num">{{percent}}%</text>
+    </view>
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{percent}}%"></view>
+    </view>
+    <view class="progress-meta">
+      <text>{{doneCount}} / {{stepCount}} 道工序已完成</text>
+      <text>建议总时长 {{totalMinutesText}}</text>
+    </view>
+  </view>
+
+  <!-- 工序清单 -->
+  <view class="list-head">
+    <view class="section-title">工序清单</view>
+    <text class="list-hint">长按可管理工序</text>
+  </view>
+
+  <view wx:if="{{!stepCount}}" class="empty card">
+    <text class="empty-mark">— —</text>
+    <text class="empty-title">还没有工序</text>
+    <text class="empty-desc">新增工序，或导入一套标准模板快速开工</text>
+    <view class="empty-btns">
+      <view class="btn btn-ghost btn-sm" bindtap="importTemplate">导入模板</view>
+      <view class="btn btn-primary btn-sm" bindtap="addStep">新增工序</view>
+    </view>
+  </view>
+
+  <view class="step-list" wx:else>
+    <view
+      wx:for="{{project.steps}}"
+      wx:key="id"
+      class="step-card {{item.done ? 'step-done' : ''}}"
+      data-id="{{item.id}}"
+      bindlongpress="stepLongPress"
+      hover-class="step-card-hover"
+    >
+      <!-- 打卡 -->
+      <view class="step-check {{item.done ? 'step-check-on' : ''}}" data-id="{{item.id}}" catchtap="toggleStep">
+        <text wx:if="{{item.done}}" class="step-check-mark">✓</text>
+      </view>
+
+      <!-- 主体 -->
+      <view class="step-body" data-id="{{item.id}}" catchtap="editStep">
+        <view class="step-head">
+          <text class="step-no num">{{item.no}}</text>
+          <text class="step-name">{{item.name}}</text>
+        </view>
+        <text wx:if="{{item.desc}}" class="step-desc">{{item.desc}}</text>
+        <view class="step-meta">
+          <text class="step-min">{{item.minutesText}}</text>
+          <text wx:if="{{item.photoCount}}" class="step-extra">{{item.photoCount}} 张现场图</text>
+          <text wx:if="{{item.note}}" class="step-extra">有备注</text>
+        </view>
+        <text wx:if="{{item.done}}" class="step-done-time">完成于 {{item.doneText}}</text>
+      </view>
+
+      <!-- 计时 -->
+      <view class="step-timer" data-id="{{item.id}}" catchtap="goTimer" hover-class="step-timer-hover">
+        <text class="step-timer-icon"></text>
+        <text class="step-timer-text">计时</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-bar">
+    <view class="btn btn-ghost bottom-btn" bindtap="goShare">分享 / 导出</view>
+    <view class="btn btn-primary bottom-btn" bindtap="addStep">新增工序</view>
+  </view>
+</view>
+
+<!-- 项目被删除 / 不存在的兜底 -->
+<view wx:if="{{!project}}" class="page">
+  <view class="empty card">
+    <text class="empty-mark">— —</text>
+    <text class="empty-title">项目不存在</text>
+    <text class="empty-desc">可能已在其他页面删除</text>
+    <view class="empty-btns">
+      <view class="btn btn-ghost btn-sm" bindtap="backHome">返回首页</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,184 @@
+/* 计时页：深色工装面板 */
+page {
+  background-color: #2C3036;
+}
+
+.timer-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 48rpx 40rpx calc(40rpx + env(safe-area-inset-bottom));
+  background-color: #2C3036;
+  color: #FFFFFF;
+}
+
+.timer-head {
+  padding: 10rpx 4rpx 34rpx;
+}
+
+.timer-kicker {
+  display: block;
+  font-size: 18rpx;
+  letter-spacing: 6rpx;
+  color: #E27B48;
+}
+
+.timer-name {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+  line-height: 1.4;
+  color: #FFFFFF;
+}
+
+/* 计时面板 */
+.dial {
+  padding: 52rpx 34rpx 34rpx;
+  background: rgba(255, 255, 255, 0.035);
+  border: 2rpx solid rgba(255, 255, 255, 0.1);
+  border-radius: 12rpx;
+}
+
+.dial-time {
+  display: block;
+  text-align: center;
+  font-size: 118rpx;
+  font-weight: 600;
+  letter-spacing: 4rpx;
+  line-height: 1.05;
+  color: #FFFFFF;
+}
+
+.dial-status {
+  display: block;
+  margin-top: 16rpx;
+  text-align: center;
+  font-size: 22rpx;
+  letter-spacing: 3rpx;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.status-running {
+  color: #E27B48;
+}
+
+.status-paused {
+  color: #D8B37A;
+}
+
+.status-finished {
+  color: #FFFFFF;
+}
+
+.dial-bar {
+  height: 8rpx;
+  margin: 44rpx 0 18rpx;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.dial-fill {
+  height: 100%;
+  background: #E27B48;
+}
+
+.dial-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20rpx;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* 控制按钮 */
+.control-row {
+  display: flex;
+  margin-top: 36rpx;
+}
+
+.ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 96rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  letter-spacing: 2rpx;
+}
+
+.ctrl + .ctrl {
+  margin-left: 16rpx;
+}
+
+.ctrl-ghost {
+  flex: 1;
+  border: 2rpx solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.ctrl-hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ctrl-primary {
+  flex: 1.4;
+  background: #E27B48;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.ctrl-primary-hover {
+  background: #C96637;
+}
+
+/* 完成态 */
+.finish-box {
+  margin-top: 40rpx;
+  padding: 40rpx 24rpx;
+  text-align: center;
+  border: 2rpx solid rgba(255, 255, 255, 0.1);
+  border-radius: 12rpx;
+}
+
+.finish-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+}
+
+.finish-desc {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.finish-btn {
+  width: 320rpx;
+  margin: 30rpx auto 0;
+}
+
+.finish-reset {
+  display: inline-block;
+  margin-top: 24rpx;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.55);
+  border-bottom: 2rpx solid rgba(255, 255, 255, 0.25);
+}
+
+/* 底部说明 */
+.timer-note {
+  margin-top: auto;
+  padding-top: 60rpx;
+}
+
+.timer-note-line {
+  display: block;
+  font-size: 19rpx;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.3);
+}

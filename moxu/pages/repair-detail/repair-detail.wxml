@@ -1,0 +1,63 @@
+<!-- 缺陷详情：成因、修复步骤、耗材、避坑提醒 -->
+<view class="page rd-page" wx:if="{{defect}}">
+
+  <view class="rd-hero">
+    <view class="rd-hero-top">
+      <text class="rd-no num">{{defect.no}}</text>
+      <text class="severity sev-{{defect.level}}">{{defect.levelText}}</text>
+    </view>
+    <text class="rd-name">{{defect.name}}</text>
+    <view class="rd-tags">
+      <text
+        wx:for="{{defect.tags}}"
+        wx:key="*this"
+        class="tag tag-dark rd-tag"
+      >{{item}}</text>
+    </view>
+  </view>
+
+  <view class="section-title">成因</view>
+  <view class="card rd-card">
+    <text class="rd-text">{{defect.cause}}</text>
+  </view>
+
+  <view class="section-title">修复步骤<text class="section-sub">{{defect.steps.length}} 步</text></view>
+  <view class="card rd-card">
+    <view class="step-row" wx:for="{{defect.steps}}" wx:for-index="idx" wx:key="*this">
+      <text class="step-index num">{{idx + 1}}</text>
+      <text class="step-text">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="section-title">耗材清单</view>
+  <view class="card rd-card consume-wrap">
+    <text
+      wx:for="{{defect.consumables}}"
+      wx:key="*this"
+      class="consume-chip"
+    >{{item}}</text>
+  </view>
+
+  <view class="section-title">避坑提醒</view>
+  <view class="tips-list">
+    <view class="tip-row" wx:for="{{defect.tips}}" wx:key="*this">
+      <view class="tip-bar"></view>
+      <text class="tip-text">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="btn btn-ghost bottom-btn" bindtap="goManual">返回手册</view>
+    <view class="btn btn-primary bottom-btn" bindtap="goMaterial">查看材料库</view>
+  </view>
+</view>
+
+<view wx:if="{{!defect}}" class="page">
+  <view class="empty card">
+    <text class="empty-mark">— —</text>
+    <text class="empty-title">未找到该缺陷</text>
+    <view class="empty-btns">
+      <view class="btn btn-ghost btn-sm" bindtap="goManual">返回手册</view>
+    </view>
+  </view>
+</view>

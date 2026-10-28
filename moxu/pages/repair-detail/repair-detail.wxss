@@ -1,0 +1,153 @@
+/* 缺陷详情样式 */
+.rd-page {
+  padding-bottom: 200rpx;
+}
+
+.rd-hero {
+  margin: -28rpx -32rpx 0;
+  padding: 44rpx 32rpx 38rpx;
+  background-image: linear-gradient(160deg, #353B42 0%, #24282D 100%);
+}
+
+.rd-hero-top {
+  display: flex;
+  align-items: center;
+}
+
+.rd-no {
+  font-size: 20rpx;
+  letter-spacing: 4rpx;
+  color: #E27B48;
+}
+
+.severity {
+  margin-left: 16rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 4rpx;
+  font-size: 18rpx;
+}
+
+.sev-1 {
+  background: rgba(107, 138, 114, 0.22);
+  color: #A8C4AE;
+}
+
+.sev-2 {
+  background: rgba(176, 128, 52, 0.24);
+  color: #E0BC80;
+}
+
+.sev-3 {
+  background: rgba(185, 80, 58, 0.26);
+  color: #EBA898;
+}
+
+.rd-name {
+  display: block;
+  margin-top: 18rpx;
+  font-size: 44rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  color: #FFFFFF;
+}
+
+.rd-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 18rpx;
+}
+
+.rd-tag {
+  margin: 0 10rpx 6rpx 0;
+}
+
+.rd-card {
+  padding: 26rpx;
+}
+
+.rd-text {
+  display: block;
+  font-size: 24rpx;
+  line-height: 1.78;
+  color: #4A505A;
+}
+
+/* 步骤 */
+.step-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.step-row:last-child {
+  margin-bottom: 0;
+}
+
+.step-index {
+  width: 40rpx;
+  margin-right: 10rpx;
+  padding-top: 2rpx;
+  font-size: 21rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+  color: #E27B48;
+  flex-shrink: 0;
+}
+
+.step-text {
+  flex: 1;
+  font-size: 24rpx;
+  line-height: 1.68;
+  color: #4A505A;
+}
+
+/* 耗材 */
+.consume-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.consume-chip {
+  margin: 0 12rpx 12rpx 0;
+  padding: 7rpx 18rpx;
+  background: #F2EFEA;
+  border: 2rpx solid #E9E5DF;
+  border-radius: 4rpx;
+  font-size: 22rpx;
+  color: #4A505A;
+}
+
+/* 避坑 */
+.tips-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.tip-row {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 12rpx;
+  background: #FFF8F4;
+  border: 2rpx solid #F0DBD1;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+
+.tip-bar {
+  width: 6rpx;
+  background: #E27B48;
+}
+
+.tip-text {
+  flex: 1;
+  padding: 16rpx 20rpx;
+  font-size: 23rpx;
+  line-height: 1.68;
+  color: #6B4A38;
+}
+
+.empty-btns {
+  display: flex;
+  justify-content: center;
+  margin-top: 28rpx;
+}
