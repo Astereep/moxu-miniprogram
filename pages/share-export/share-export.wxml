@@ -1,0 +1,100 @@
+<!-- 分享导出：微信卡片 / canvas 工序长图 / 复制文本 -->
+<view class="page share-page" wx:if="{{project}}">
+
+  <!-- 当前项目 -->
+  <view class="picker-card card">
+    <view class="picker-main">
+      <text class="picker-label">当前项目</text>
+      <text class="picker-name">{{project.name}}</text>
+      <view class="picker-meta">
+        <text class="tag">{{project.type}}</text>
+        <text class="picker-sub">{{project.done}} / {{project.total}} 工序 · {{project.dateText}}</text>
+      </view>
+    </view>
+    <picker mode="selector" range="{{projectNames}}" value="{{projectIndex}}" bindchange="onPickProject">
+      <view class="picker-switch" hover-class="picker-switch-hover">切换</view>
+    </picker>
+  </view>
+
+  <!-- 清单预览 -->
+  <view class="section-title">清单预览<text class="section-sub">{{project.steps.length}} 道工序</text></view>
+  <view class="card preview-card">
+    <view wx:for="{{project.steps}}" wx:key="id" class="pv-row">
+      <text class="pv-no num">{{item.no}}</text>
+      <text class="pv-name {{item.done ? 'pv-name-done' : ''}}">{{item.name}}</text>
+      <text class="pv-min">{{item.minutesText}}</text>
+      <text wx:if="{{item.done}}" class="pv-check">✓</text>
+    </view>
+    <view wx:if="{{!project.steps.length}}" class="pv-empty">该项目还没有工序，可先到详情页添加</view>
+  </view>
+
+  <!-- 操作 -->
+  <view class="section-title">导出与分享</view>
+  <view class="action-list">
+    <button class="action-row" open-type="share" hover-class="action-hover">
+      <text class="action-index num">01</text>
+      <view class="action-body">
+        <text class="action-name">分享小程序卡片</text>
+        <text class="action-desc">发送给微信好友，接收方打开模序首页</text>
+      </view>
+      <text class="action-go">分享</text>
+    </button>
+
+    <view class="action-row" hover-class="action-hover" bindtap="generateImage">
+      <text class="action-index num">02</text>
+      <view class="action-body">
+        <text class="action-name">生成工序清单长图</text>
+        <text class="action-desc">canvas 绘制，可预览并保存到相册</text>
+      </view>
+      <text class="action-go">{{generating ? '生成中…' : '生成'}}</text>
+    </view>
+
+    <view class="action-row" hover-class="action-hover" bindtap="copyText">
+      <text class="action-index num">03</text>
+      <view class="action-body">
+        <text class="action-name">复制文本清单</text>
+        <text class="action-desc">纯文本格式，可直接粘贴到聊天或文档</text>
+      </view>
+      <text class="action-go">复制</text>
+    </view>
+  </view>
+
+  <!-- 长图结果 -->
+  <view wx:if="{{previewPath}}" class="result-box">
+    <view class="result-head">
+      <view class="section-title">长图预览</view>
+      <text class="result-close" bindtap="clearPreview">关闭</text>
+    </view>
+    <image class="result-img" src="{{previewPath}}" mode="widthFix" show-menu-by-longpress="{{true}}" />
+    <view class="result-actions">
+      <view class="btn btn-ghost result-btn" bindtap="generateImage">重新生成</view>
+      <view class="btn btn-primary result-btn" bindtap="saveImage">保存到相册</view>
+    </view>
+    <text class="result-tip">也可长按图片转发或保存</text>
+  </view>
+
+  <view class="share-note">
+    <text class="share-note-line">· 分享卡片仅包含项目名称与入口</text>
+    <text class="share-note-line">· 工序数据保存在本机，不会随卡片传输</text>
+  </view>
+
+  <!-- 离屏 canvas：仅用于生成长图 -->
+  <canvas
+    type="2d"
+    id="exportCanvas"
+    class="export-canvas"
+    style="width: {{canvasW}}px; height: {{canvasH}}px;"
+  ></canvas>
+</view>
+
+<!-- 无项目 -->
+<view wx:if="{{!project}}" class="page">
+  <view class="empty card">
+    <text class="empty-mark">— —</text>
+    <text class="empty-title">还没有可导出的项目</text>
+    <text class="empty-desc">先新建一个项目，录入工序后再来导出</text>
+    <view class="empty-btns">
+      <view class="btn btn-primary btn-sm" bindtap="goCreate">新建项目</view>
+    </view>
+  </view>
+</view>
